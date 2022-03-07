@@ -11,7 +11,7 @@
     <link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' />
 
 
-    <style>
+<style>
 body {
   margin:50px 10px;
 }
@@ -105,27 +105,24 @@ p:first-child:first-letter {
       padding: 0em 0.1em 0em 0em;
 }
 
-img {
-  margin-bottom: 1em;
+pre {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-left: 3px solid #F2957E;
+    color: #666;
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em 1.5em;
+    display: block;
+    word-wrap: break-word;
 }
 
-.question {
-  width: 60%;
-}
 
-.answer {
-  width: 40%;
-}
-
-#singleElementImg {
-  width: 60%;
-}
-
-@media only screen and (max-width: 768px) {
-  img {
-    display: none;
-  }
-}
     </style>
 </head>
 <body>
@@ -156,34 +153,204 @@ img {
 
           <p>Below are some leetcode problem illustrations on how we can translate binary search into code. There is a pattern for solving this kind of problem if you check out the answer to each question.</p>
 
-  <div class="row justify-content-center"><img class="question" src="./assets/sqrt_question.JPG"/></div>
+
   <p class="text-center text-muted"><a href="https://leetcode.com/problems/sqrtx/" target="_blank">https://leetcode.com/problems/sqrtx/</a></p>
-  <div class="row justify-content-center"><img class="answer" src="./assets/sqrt_answer.png"/></div> 
-
-
-  <div class="row justify-content-center"><img class="question" src="./assets/search_insert_question.JPG"/></div>
+<pre>
+class Solution:
+def mySqrt(self, x: int) -> int:    
+    if x <= 1:
+        return x
+    
+    l = 1
+    r = x // 2
+    
+    while l <= r:
+        mid = (l + r) // 2
+        
+        if mid * mid <= x and (mid + 1) * (mid + 1) > x:
+            return mid
+        
+        elif mid * mid > x:
+            r = mid - 1
+            
+        else:
+            l = mid + 1
+</pre>
   <p class="text-center text-muted"><a href="https://leetcode.com/problems/search-insert-position/" target="_blank">https://leetcode.com/problems/search-insert-position/</a></p>
-  <div class="row justify-content-center"><img class="answer" src="./assets/search_insert_answer.png"/></div> 
+<pre>
+class Solution:
+  def searchInsert(self, nums: List[int], target: int) -> int:
+      if target <= nums[0]:
+          return 0
+      if target > nums[len(nums)-1]:
+          return len(nums)
+      
+      l = 0
+      r = len(nums) - 1
+      
+      while l <= r:
+          mid = (l + r) // 2
+          
+          if nums[mid] == target:
+              return mid
+          
+          elif nums[mid] < target and nums[mid + 1] > target:
+              return mid + 1
 
-  <div class="row justify-content-center"><img class="question" src="./assets/peak_question.JPG"/></div>
+          elif nums[mid] > target:
+              r = mid - 1
+          
+          else:
+              l = mid + 1
+</pre>
   <p class="text-center text-muted"><a href="https://leetcode.com/problems/peak-index-in-a-mountain-array/" target="_blank">https://leetcode.com/problems/peak-index-in-a-mountain-array/</a></p>
-  <div class="row justify-content-center"><img class="answer" src="./assets/peak_answer.png"/></div> 
-
-  <div class="row justify-content-center"><img class="question" src="./assets/coin_question.JPG"/></div> 
+<pre>
+class Solution:
+  def peakIndexInMountainArray(self, arr: List[int]) -> int:
+      l = 0
+      r = len(arr) - 1
+      
+      while l <= r:
+          mid = (l + r) // 2
+          
+          if arr[mid - 1] < arr[mid] > arr[mid + 1]:
+              return mid
+          
+          elif arr[mid + 1] < arr[mid] < arr[mid - 1]:
+              r = mid - 1
+              
+          else:
+              l = mid + 1
+</pre>
   <p class="text-center text-muted"><a href="https://leetcode.com/problems/arranging-coins/" target="_blank">https://leetcode.com/problems/arranging-coins/</a></p>
-  <div class="row justify-content-center"><img class="answer" src="./assets/coin_answer.JPG"/></div> 
-
-  <div class="row justify-content-center"><img class="question" src="./assets/single_element_question.JPG"/></div>
+<pre>
+class Solution:
+  def arrangeCoins(self, n: int) -> int:       
+      l = 0
+      r = n
+      
+      while l <= r:
+          mid = (l + r) // 2
+                                                                                
+          if mid * (mid + 1) / 2 == n:
+              return mid
+          
+          if mid * (mid + 1) / 2 > n:
+              r = mid - 1
+              
+          else:
+              l = mid + 1
+              
+      return r
+</pre>
   <p class="text-center text-muted"><a href="https://leetcode.com/problems/single-element-in-a-sorted-array/" target="_blank">https://leetcode.com/problems/single-element-in-a-sorted-array/</a></p>
-  <div class="row justify-content-center"><img id="singleElementImg" class="answer" src="./assets/single_element_answer.JPG"/></div>
-
-  <div class="row justify-content-center"><img class="question" src="./assets/package_question.JPG"/></div>
+<pre>
+class Solution:
+  def singleNonDuplicate(self, nums: List[int]) -> int:
+      if len(nums) == 1:
+          return nums[0]
+      
+      if nums[0] != nums[1]:
+          return nums[0]
+      
+      if nums[-1] != nums[-2]:
+          return nums[-1]
+      
+      l = 0
+      r = len(nums) - 1
+      
+      while l <= r:
+          mid = (l + r) // 2
+          
+          if nums[mid] != nums[mid + 1] and nums[mid] != nums[mid - 1]:
+              return nums[mid]
+          
+                # 1, 1, 4, 5, 5, 6, 6, 8, 8                             1, 1, 4, 5, 5, 6, 6, 8, 8, 9, 9
+          elif (mid % 2 == 0 and nums[mid] == nums[mid - 1]) or (mid % 2 != 0 and nums[mid] == nums[mid + 1]):
+              r = mid - 1
+              
+          else:
+              l = mid + 1
+</pre>
   <p class="text-center text-muted"><a href="https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/" target="_blank">https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/</a></p>
-  <div class="row justify-content-center"><img class="answer" src="./assets/package_answer.png"/></div> 
+<pre>
+class Solution:
+def isPossible(self, weights, load, days):
+  cnt = 1
+  weigtAllocated = 0
+      
+  for i in range(len(weights)):
+    if(weigtAllocated > load):
+      return False
+          
+    weigtAllocated += weights[i]
+          
+    if(weigtAllocated > load):
+      cnt += 1
+      weigtAllocated = weights[i]
+              
+  return cnt <= days
 
-  <div class="row justify-content-center"><img class="question" src="./assets/magnetic_question.JPG"/></div>
+
+def shipWithinDays(self, weights: List[int], days: int) -> int:
+  if days > len(weights):
+    return -1
+      
+  l = max(weights)
+  r = sum(weights)
+      
+  res = 0
+      
+  while l <= r:
+    mid = (l + r) // 2
+          
+    if self.isPossible(weights, mid, days):
+      res = mid
+      r = mid - 1
+              
+    else:
+      l = mid + 1
+              
+  return res  
+</pre>
   <p class="text-center text-muted"><a href="https://leetcode.com/problems/magnetic-force-between-two-balls/" target="_blank">https://leetcode.com/problems/magnetic-force-between-two-balls/</a></p>
-  <div class="row justify-content-center"><img class="answer" src="./assets/magnetic_answer.JPG"/></div> 
+<pre>
+class Solution:
+  def check(self, mid, m, position):
+      temp_pos = position[0]
+      temp_cnt = 1
+      
+      for i in range(len(position)):
+          if position[i] >= temp_pos + mid:
+              temp_pos = position[i]
+              temp_cnt += 1
+              
+      if temp_cnt < m:
+          return False
+      
+      return True     
+      
+      
+  def maxDistance(self, position: List[int], m: int) -> int:
+      position.sort()
+      
+      l = 0
+      r = position[-1]
+      
+      res = 0
+      
+      while l <= r:
+          mid = (l + r) // 2
+          
+          if self.check(mid, m, position):
+              res = mid
+              l = mid + 1
+              
+          else:
+              r = mid - 1
+              
+      return res
+</pre>
 
 
 </div>
