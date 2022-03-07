@@ -122,6 +122,9 @@ pre {
     word-wrap: break-word;
 }
 
+pre span {
+  color: #339b4b;
+}
 
     </style>
 </head>
@@ -265,7 +268,7 @@ class Solution:
           if nums[mid] != nums[mid + 1] and nums[mid] != nums[mid - 1]:
               return nums[mid]
           
-                # 1, 1, 4, 5, 5, 6, 6, 8, 8                             1, 1, 4, 5, 5, 6, 6, 8, 8, 9, 9
+              <span># 1, 1, 4, 5, 5, 6, 6, 8, 8                        1, 1, 4, 5, 5, 6, 6, 8, 8, 9, 9</span>
           elif (mid % 2 == 0 and nums[mid] == nums[mid - 1]) or (mid % 2 != 0 and nums[mid] == nums[mid + 1]):
               r = mid - 1
               
