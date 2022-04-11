@@ -267,6 +267,24 @@ class Solution:
       return nums[l]
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/find-peak-element/" target="_blank">https://leetcode.com/problems/find-peak-element/</a></p>
+<pre>
+class Solution:
+  def findPeakElement(self, nums: List[int]) -> int:
+      l = 0
+      r = len(nums) - 1
+      
+      while l < r:
+          mid = (l + r) // 2
+          
+          if nums[mid] >= nums[mid + 1]:
+              r = mid
+          else:
+              l = mid + 1
+              
+      return l
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/" target="_blank">https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/</a></p>
 <pre>
 class Solution:
