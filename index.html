@@ -285,6 +285,27 @@ class Solution:
       return l
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/sqrtx/" target="_blank">https://leetcode.com/problems/sqrtx/</a></p>
+<pre>
+class Solution:
+  def mySqrt(self, x: int) -> int:  
+      ans = 0
+      l = 1
+      r = x
+      
+      while l <= r:
+          mid = (l + r) // 2
+          
+          if mid * mid <= x:
+              ans = mid
+              l = mid + 1
+              
+          else:
+              r = mid - 1
+              
+      return ans
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/" target="_blank">https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/</a></p>
 <pre>
 class Solution:
